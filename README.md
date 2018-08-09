@@ -5,7 +5,7 @@ IBM Watson connector for Algolia InstantSearch.js allows you to easily add Speec
 
 ![Algolia and watson = love](https://content.lext.so/github/IBM-watson-algolia-connector-instantsearch.js/assets/algolia-waston-love.png)
 
-This repo is initially develop by [Lextenso](https://www.lextenso.fr), open to the community :hearts: and isn't affiliate or support by IBM or Algolia.
+This repo is initially develop by [Lextenso](https://www.lextenso.fr), open to the community :hearts: and isn't affiliate or supported by IBM or Algolia.
 
 __PLEASE NOTE__ : This current version `0.3.1` still be in beta, please use carefully.
 
@@ -20,7 +20,7 @@ The connector handle :
 * Refine Algolia search with new values in realtime
 
 #### Requirements
-This connector doesn't inject any templates, you need to develop your own HTML element to trigger Watson with the connector.
+This connector doesn't inject any templates, you have to develop your own HTML element to trigger Watson with this connector.
 
 You also need [Algolia](https://www.algolia.com/users/sign_up) and [IBM Watson](https://www.ibm.com/watson/services/speech-to-text/) credentials. (_Elementary, my dear Watson_)
 
@@ -51,8 +51,8 @@ import IBMWatsonAlgoliaConnector from './IBMWatsonAlgoliaConnector';
 ```
 
 ## Configuration
-Some configurations are required to the connector to work properly.
-Every configuration attributes are details in the [next section](#specifications).
+Some configurations are required for the connector to work properly.
+Every attributes are listed and detailed in the [specifications section](#specifications).
 
 #### Standalone - CDN
 ```html
@@ -124,7 +124,7 @@ search.start();
 ## Build examples
 
 Two examples are available : standalone and ES Module.
-Each example require an API endpoint to fetch the Watson's token, you can find examples [here](https://github.com/watson-developer-cloud/speech-javascript-sdk/tree/master/examples)
+Each example require an server-side endpoint to fetch the Watson's token, you can find examples [here](https://github.com/watson-developer-cloud/speech-javascript-sdk/tree/master/examples)
 
 ### Standalone
 
@@ -222,19 +222,19 @@ That's it.
         <td>[function (state =&gt; active &vert;&vert;&nbsp;inactive)]</td>
         <td>True (Only if `onInactiveClass` and `onActiveClass` are not enouth for your needs)</td>
         <td>This callback back function is trigger each time the state of Watson change.<br/>
-        Possible values: `active|inactive`<br>_NOTE_ : The callback function override `onInactiveClass` and `onActiveClass`</td>
+        Possible values: 'active' OR 'inactive'<br><strong>NOTE</strong> : The callback function override `onInactiveClass` and `onActiveClass`</td>
     </tr>
     <tr>
         <td>watsonConfig</td>
         <td></td>
         <td></td>
         <td></td>
-        <td>Object configuration of Watson (see [here](http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text_recognize-microphone.html))<br>_NOTE_ : `token` and `outputElement` are override</td>
+        <td>Object configuration of Watson (see doc : http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text_recognize-microphone.html)<br><strong>NOTE</strong> : 'token' and 'outputElement' are override</td>
     </tr>
     <tr>
         <td></td>
         <td>tokenURL</td>
-        <td>[string&vert;URL]</td>
+        <td>[string]</td>
         <td>True</td>
         <td>Must be an URL to a back-end service.</td>
     </tr>
@@ -243,7 +243,7 @@ That's it.
         <td>model</td>
         <td>[string]</td>
         <td>False</td>
-        <td>Check possible values [here](https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/node.html?node#get-model)</td>
+        <td>Check possible values here : https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/node.html?node#get-model</td>
     </tr>
     <tr>
         <td></td>
