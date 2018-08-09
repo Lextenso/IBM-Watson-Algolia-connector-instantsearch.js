@@ -37,7 +37,7 @@ sher-lock:MyProject$ npm run build
 ```
 
 ### ES Module with Webpack
-Pre-compiled bundle is available directly in the /dist directory.
+Import the IBMWatsonAlgoliaConnector module which is available in the `/src` directory.
 
 ```js
 import IBMWatsonAlgoliaConnector from './IBMWatsonAlgoliaConnector';
