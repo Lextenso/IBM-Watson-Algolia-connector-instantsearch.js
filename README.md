@@ -5,13 +5,13 @@ IBM Watson connector for Algolia InstantSearch.js allows you to easily add Speec
 
 ![Algolia and watson = love](https://content.lext.so/github/IBM-watson-algolia-connector-instantsearch.js/assets/algolia-waston-love.png)
 
-This repo is initially develop by [Lextenso](https://www.lextenso.fr), open to the community :hearts: and isn't affiliate or supported by IBM or Algolia.
+This repo is initially developed by [Lextenso](https://www.lextenso.fr), open to the community :hearts: and isn't affiliated or supported by IBM or Algolia.
 
-__PLEASE NOTE__ : This current version `0.3.1` still be in beta, please use carefully.
+__PLEASE NOTE__ : This current version `0.3.1` still in beta, please use carefully.
 
 ## Built with IBM Watson Speech Services
 This is a middleware between _Algolia InstantSearch.js_ and _IBM Watson_.
-This Algolia connector is bundle with the NPM package `watson-speech/speech-to-text/recognize-microphone` and `instantsearch.js/es/connectors`.
+This Algolia connector is bundled with the NPM package `watson-speech/speech-to-text/recognize-microphone` and `instantsearch.js/es/connectors`.
 
 The connector handle :
 * Microphone browser authorization
@@ -25,20 +25,13 @@ This connector doesn't inject any templates, you have to develop your own HTML e
 You also need [Algolia](https://www.algolia.com/users/sign_up) and [IBM Watson](https://www.ibm.com/watson/services/speech-to-text/) credentials. (_Elementary, my dear Watson_)
 
 ## Dependencies
-
-* [`instantsearch.js`](https://github.com/algolia/instantsearch.js/) => 2.10.0
-* [`watson-speech`](https://github.com/watson-developer-cloud/speech-javascript-sdk/) => 0.34.2
+* [instantsearch.js](https://github.com/algolia/instantsearch.js/) : 2.10.0
+* [watson-speech](https://github.com/watson-developer-cloud/speech-javascript-sdk/) : 0.34.2
 
 ## Installation
 
 ### Standalone
-Pre-compiled bundle is available on our CDN (powered by Cloudflare) :
-
-```html
-<script type="text/javascript" href="https://content.lext.so/github/IBM-watson-algolia-connector-instantsearch.js/0.3.1/dist/IBMWatsonAlgoliaConnector.js"></script>
-```
-
-Or directly by building the connector with Webpack
+Build the connector with Webpack :
 ```console
 sher-lock:MyProject$ npm run build
 ```
@@ -51,12 +44,10 @@ import IBMWatsonAlgoliaConnector from './IBMWatsonAlgoliaConnector';
 ```
 
 ## Configuration
-Some configurations are required for the connector to work properly.
-Every attributes are listed and detailed in the [specifications section](#specifications).
+All attributes are listed and detailed in the [specifications section](#specifications).
 
-#### Standalone - CDN
+#### Standalone
 ```html
-<script type="text/javascript" href="https://content.lext.so/github/IBM-watson-algolia-connector-instantsearch.js/0.3.1/dist/IBMWatsonAlgoliaConnector.js"></script>
 <script type="text/javascript">
 const search = instantsearch(config);
 
@@ -124,11 +115,11 @@ search.start();
 ## Build examples
 
 Two examples are available : standalone and ES Module.
-Each example require an server-side endpoint to fetch the Watson's token, you can find examples [here](https://github.com/watson-developer-cloud/speech-javascript-sdk/tree/master/examples)
+Each example require a server-side endpoint to fetch Watson's token, you can find examples [here](https://github.com/watson-developer-cloud/speech-javascript-sdk/tree/master/examples)
 
 ### Standalone
 
-Change the API endpoint to fetch the Watson's token in the `example/standalone/app.js` file.
+Change the API endpoint to fetch Watson's token in the `example/standalone/app.js` file.
 ```js
 search.addWidget(
     IBMWatsonAlgoliaConnector.default({
@@ -144,10 +135,9 @@ Then
 ```console
 sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
 ```
-That's it.
 
 ### ES Module with Webpack
-Change the API endpoint to fetch the Watson's token in the `example/es/src/main.js` file.
+Change the API endpoint to fetch Watson's token in the `example/es/src/main.js` file.
 ```js
 search.addWidget(
     IBMWatsonAlgoliaConnector({
@@ -163,7 +153,6 @@ Then
 ```console
 sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
 ```
-That's it.
 
 ## Specifications
 <table>
@@ -171,7 +160,7 @@ That's it.
         <th>Attributes</th>
         <th></th>
         <th></th>
-        <th>required ?</th>
+        <th>Required ?</th>
         <th>Comment</th>
     </tr>
     <tr>
@@ -185,15 +174,15 @@ That's it.
         <td></td>
         <td>searchInput</td>
         <td>[string]</td>
-        <td>True</td>
-        <td>document.querySelector is use in the connector. The value must be a selector.</td>
+        <td>Yes</td>
+        <td>This string must be a [valid CSS selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) string.</td>
     </tr>
     <tr>
         <td></td>
         <td>voiceButton</td>
         <td>[string]</td>
-        <td>True</td>
-        <td>document.querySelector is use in the connector. The value must be a selector.</td>
+        <td>Yes</td>
+        <td>This string must be a [valid CSS selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) string.</td>
     </tr>
     <tr>
         <td>template</td>
@@ -206,51 +195,51 @@ That's it.
         <td></td>
         <td>onActiveClass</td>
         <td>[string]</td>
-        <td>True (if NOT `onStateChange`)</td>
+        <td>Yes (if NOT `onStateChange`)</td>
         <td></td>
     </tr>
     <tr>
         <td></td>
         <td>onInactiveClass</td>
         <td>[string]</td>
-        <td>True (if NOT `onStateChange`)</td>
+        <td>Yes (if NOT `onStateChange`)</td>
         <td></td>
     </tr>
     <tr>
         <td></td>
         <td>onStateChange</td>
         <td>[function (state =&gt; active &vert;&vert;&nbsp;inactive)]</td>
-        <td>True (Only if `onInactiveClass` and `onActiveClass` are not enouth for your needs)</td>
+        <td>Yes (Only if `onInactiveClass` and `onActiveClass` are not enouth for your needs)</td>
         <td>This callback back function is trigger each time the state of Watson change.<br/>
-        Possible values: 'active' OR 'inactive'<br><strong>NOTE</strong> : The callback function override `onInactiveClass` and `onActiveClass`</td>
+        Possible values: active OR inactive<br><strong>NOTE</strong> : The callback function override `onInactiveClass` and `onActiveClass`</td>
     </tr>
     <tr>
         <td>watsonConfig</td>
         <td></td>
         <td></td>
         <td></td>
-        <td>Object configuration of Watson (see doc : http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text_recognize-microphone.html)<br><strong>NOTE</strong> : 'token' and 'outputElement' are override</td>
+        <td>Watson configuration (see doc : http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text_recognize-microphone.html)<br><strong>NOTE</strong> : 'token' and 'outputElement' will be overridden on connector start</td>
     </tr>
     <tr>
         <td></td>
         <td>tokenURL</td>
         <td>[string]</td>
-        <td>True</td>
-        <td>Must be an URL to a back-end service.</td>
+        <td>Yes</td>
+        <td>Must be an URL to a back-end service</td>
     </tr>
     <tr>
         <td></td>
         <td>model</td>
         <td>[string]</td>
-        <td>False</td>
+        <td>No</td>
         <td>Check possible values here : https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/node.html?node#get-model</td>
     </tr>
     <tr>
         <td></td>
         <td>continuous</td>
         <td>[boolean]</td>
-        <td>False</td>
-        <td>Watson stop listening when it detect final sentence</td>
+        <td>No</td>
+        <td>Watson stop listening when it detects final sentence</td>
     </tr>
 </table>
 
