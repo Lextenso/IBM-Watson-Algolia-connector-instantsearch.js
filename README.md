@@ -210,7 +210,7 @@ sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
         <td>onStateChange</td>
         <td>[function (state =&gt; active &vert;&vert;&nbsp;inactive)]</td>
         <td>Yes (Only if `onInactiveClass` and `onActiveClass` are not enouth for your needs)</td>
-        <td>This callback back function is trigger each time the state of Watson change.<br/>
+        <td>This callback will be triggered every time the state of Watson change.<br/>
         Possible values: active OR inactive<br><strong>NOTE</strong> : The callback function override `onInactiveClass` and `onActiveClass`</td>
     </tr>
     <tr>
