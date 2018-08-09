@@ -175,14 +175,14 @@ sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
         <td>searchInput</td>
         <td>[string]</td>
         <td>Yes</td>
-        <td>This string must be a [valid CSS selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) string.</td>
+        <td>This string must be a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">valid CSS selector</a> string.</td>
     </tr>
     <tr>
         <td></td>
         <td>voiceButton</td>
         <td>[string]</td>
         <td>Yes</td>
-        <td>This string must be a [valid CSS selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) string.</td>
+        <td>This string must be a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">valid CSS selector</a> string.</td>
     </tr>
     <tr>
         <td>template</td>
@@ -218,7 +218,7 @@ sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
         <td></td>
         <td></td>
         <td></td>
-        <td>Watson configuration (see doc : http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text_recognize-microphone.html)<br><strong>NOTE</strong> : 'token' and 'outputElement' will be overridden on connector start</td>
+        <td>Watson configuration (<a href="http://watson-developer-cloud.github.io/speech-javascript-sdk/master/module-watson-speech_speech-to-text_recognize-microphone.html">see doc</a>)<br><strong>NOTE</strong> : 'token' and 'outputElement' will be overridden on connector start</td>
     </tr>
     <tr>
         <td></td>
@@ -232,7 +232,7 @@ sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
         <td>model</td>
         <td>[string]</td>
         <td>No</td>
-        <td>Check possible values here : https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/node.html?node#get-model</td>
+        <td>Check possible values <a href="https://www.ibm.com/watson/developercloud/speech-to-text/api/v1/node.html?node#get-model">here</a></td>
     </tr>
     <tr>
         <td></td>
