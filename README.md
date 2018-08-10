@@ -1,5 +1,6 @@
 ![](https://img.shields.io/badge/version-0.3.1-green.svg)
 ![](https://img.shields.io/badge/status-beta-red.svg)
+[![](https://data.jsdelivr.com/v1/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js/badge)](https://www.jsdelivr.com/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js)
 # IBM Watson connector for Algolia InstantSearch.js
 IBM Watson connector for Algolia InstantSearch.js allows you to easily add Speech to Text (STT) as a widget to your Algolia search.
 
@@ -31,7 +32,12 @@ You also need [Algolia](https://www.algolia.com/users/sign_up) and [IBM Watson](
 ## Installation
 
 ### Standalone
-Build the connector with Webpack :
+Pre-compiled bundle is available on [jsdelivr.com CDN](https://www.jsdelivr.com/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js) :
+ ```html
+<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.3.1-beta/dist/IBMWatsonAlgoliaConnector.js" integrity="sha256-AYjIPJf0idsNjSmQuUU1vhqBzESeV7rXS8uIvjFwXIw=" crossorigin="anonymous"></script>
+```
+
+Or build the connector with Webpack :
 ```console
 sher-lock:MyProject$ npm run build
 ```
@@ -48,6 +54,7 @@ All attributes are listed and detailed in the [specifications section](#specific
 
 #### Standalone
 ```html
+<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.3.1-beta/dist/IBMWatsonAlgoliaConnector.js" integrity="sha256-AYjIPJf0idsNjSmQuUU1vhqBzESeV7rXS8uIvjFwXIw=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 const search = instantsearch(config);
 
@@ -57,7 +64,7 @@ search.addWidget(
     IBMWatsonAlgoliaConnector.default({
         container: {
             searchInput: [string],
-            voiceButton: [string],
+            voiceButton: [string]
         },
         template: {
             onActiveClass: [string],
