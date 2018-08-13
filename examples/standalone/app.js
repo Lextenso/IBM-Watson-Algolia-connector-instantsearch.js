@@ -125,8 +125,8 @@ function app(opts) {
               voiceButton: 'button#mic-watson'
           },
           template: {
-              onActiveClass: 'btn-outline-success',
-              onInactiveClass: 'btn-danger'
+              onActiveClass: 'recording',
+              onInactiveClass: 'primary'
           },
           watsonConfig: {
               tokenURL: '../../dist/api.php',

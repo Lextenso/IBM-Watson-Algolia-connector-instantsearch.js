@@ -10,6 +10,60 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.css">
   <link rel="stylesheet" type="text/css" href="https://preview.algolia.com/instantsearch/assets/style.css">
   <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/hilnmyskv/image/upload/c_fit,w_32,h_32/algolia-mark.ico" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- stylesheet for Watson button -->
+  <style type="text/css">
+      @keyframes changeOp {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0.6;
+      }
+    }
+    .button-watson {
+        backface-visibility: hidden;
+        position: relative;
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+        display: inline-block;
+        white-space: nowrap;
+        background: #111;
+        border-radius: 100px;
+        border: 0px solid #444;
+        border-width: 0px 0px 0px 0px;
+        padding: 10px 13px 10px 13px;
+        color: #000;
+        font-size: 16px;
+        font-family: Helvetica Neue;
+        font-weight: 900;
+        font-style: normal;
+        margin-top: 15px;
+    }
+
+    .button-watson.primary {
+        background-color: #69c469;
+    }
+    .button-watson.recording {
+        background-color: #e52;
+        animation-duration: 1s;
+        animation-name: changeOp;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+    .button-watson > i {
+        color: #fff;
+        font-size: 1em;
+        border-radius: 0px;
+        border: 0px solid transparent;
+        border-width: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+        margin: 0px 0px 0px 0px;
+        position: static;
+    }
+  </style>
 </head>
 <body>
 
@@ -28,10 +82,18 @@
     </div>
 
     <div id="right-column">
-        <div class="jumbeton" style="height: 50px; width: 100%; margin: auto; background: #eee;">
-            <p style="text-align: center; padding-top: 15px;">
-                Try Watson ! : <button id="mic-watson">Mics 🎙</button>
-            </p>
+        <div class="ais-hits--item" style="background: #eee;">
+            <div class="hit">
+              <div class="hit-image">
+                <img src="https://www.underconsideration.com/brandnew/archives/ibm_watson_logo.jpg" alt="IBM Watson logo">
+              </div>
+              <div class="hit-content">
+                <h2 class="hit-name">Try IBM Watson Algolia Connector</h2>
+                <p class="hit-description">Click on the button down below :<br />
+                    <button class="button-watson primary" id="mic-watson"><i class="material-icons">mic</i></button>
+                </p>
+              </div>
+            </div>
         </div>
       <div id="sort-by-wrapper"><span id="sort-by"></span></div>
       <div id="stats"></div>
