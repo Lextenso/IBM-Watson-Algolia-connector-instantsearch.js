@@ -23,9 +23,9 @@ var IBMWatsonAlgoliaConnector = connectSearchBox((connectorRenderingOptions, isF
     }
 
     let switchBtnClassByState = (state='active') => {
-        if(state === 'active') {
+        if(state === 'inactive') {
             document.querySelector(config.container.voiceButton).classList.replace(config.template.onActiveClass, config.template.onInactiveClass);
-        } else if (state === 'inactive') {
+        } else if (state === 'active') {
             document.querySelector(config.container.voiceButton).classList.replace(config.template.onInactiveClass, config.template.onActiveClass);
         }
         return true;
