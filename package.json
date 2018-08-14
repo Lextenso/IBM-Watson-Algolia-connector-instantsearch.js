@@ -9,6 +9,7 @@
   "author": "Julien Madiot <julien.madiot@lextenso.fr>",
   "dependencies": {
     "instantsearch.js": "^2.10.0",
+    "to-factory": "^1.0.0",
     "watson-speech": "^0.34.2"
   },
   "devDependencies": {

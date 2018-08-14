@@ -1,84 +1,102 @@
-import {connectSearchBox} from "instantsearch.js/es/connectors";
+import toFactory from 'to-factory';
+import connectSearchBox from "instantsearch.js/es/connectors/search-box/connectSearchBox";
 import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-microphone';
 /**
  * @module lextenso/IBM-watson-algolia-connector-instantsearch.js
  */
 
-var IBMWatsonAlgoliaConnector = connectSearchBox((connectorRenderingOptions, isFirstRendering) => {
+ class IBMWatsonAlgoliaConnectorClass {
+  constructor(connectorRenderingOptions, isFirstRendering) {
+    // Config
     if (!isFirstRendering) return;
     if (!window.MediaRecorder && !watsonSpeechMicrophone.isSupported) return;
+    this.renderingOptions = connectorRenderingOptions;
+    this.config = this.renderingOptions.widgetParams;
+    this.configWaston = this.config.watsonConfig;
+    delete this.config.watsonConfig;
 
-    // Config
-    let config = connectorRenderingOptions.widgetParams;
-    let configWaston = config.watsonConfig;
+    this.configWaston.token =  '';
+    this.configWaston.outputElement = this.config.container.searchInput;
 
-    configWaston.token =  '';
-    configWaston.outputElement = config.container.searchInput;
+    this.watsonListening = false;
+    this.selfCheck();
 
-    var stream;
-    let watsonListening = false;
-
-    if (!config || !configWaston || !configWaston.tokenURL) {
-        throw new Error('WatsonAlgoliaConnectorInstantsearch.js: missing required connector config');
-    }
-
-    let switchBtnClassByState = (state='active') => {
-        if(state === 'inactive') {
-            document.querySelector(config.container.voiceButton).classList.replace(config.template.onActiveClass, config.template.onInactiveClass);
-        } else if (state === 'active') {
-            document.querySelector(config.container.voiceButton).classList.replace(config.template.onInactiveClass, config.template.onActiveClass);
-        }
-        return true;
-    };
-
-    if(typeof config.template.onStateChange === 'function'){
-        switchBtnClassByState = config.template.onStateChange;
-    }
-
-    const watsonSSToken = () => {
-        return fetch(configWaston.tokenURL)
-        .then((res) => {
-            return res.text();
-        });
-    }
-
-    watsonSSToken().then((token) => {
+    this.watsonSSToken().then((token) => {
         if(typeof token !== 'string'){
             throw new Error('WatsonAlgoliaConnectorInstantsearch.js: incorrect token format');
         }
-        configWaston.token = token;
-        document.querySelector(config.container.voiceButton).onclick = () => {
-            if(typeof watsonListening === 'boolean' && !watsonListening){
-                watsonListening = true;
-                switchBtnClassByState('active');
-                stream = watsonSpeechMicrophone(configWaston);
-                stream.on('data', (data) => {
-                    var query = document.querySelector(config.container.searchInput).value || '';
-                    query = query.trim();
-                    connectorRenderingOptions.refine(query);
+        this.configWaston.token =  token;
+        document.querySelector(this.config.container.voiceButton).onclick = () => {
+            if(typeof this.watsonListening === 'boolean' && !this.watsonListening){
+                this.watsonListening = true;
+                this.switchBtnClassByState('active');
+                this.stream = watsonSpeechMicrophone(this.configWaston);
 
-                    if(typeof configWaston.continuous === 'boolean' && !configWaston.continuous && typeof data.results[0].final === 'boolean' && data.results[0].final){
-                        stream.stop();
-                        watsonListening = false;
-                        switchBtnClassByState('inactive');
+                this.stream.on('data', (data) => {
+                    var query = document.querySelector(this.config.container.searchInput).value || '';
+                    query = query.trim();
+                  if(query !== ''){
+                      this.renderingOptions.refine(query);
+                  }
+
+                  if(typeof this.configWaston.continuous === 'boolean' && !this.configWaston.continuous && typeof data.results[0] !== 'undefined' && typeof data.results[0].final === 'boolean' && data.results[0].final){
+                      this.stream.stop();
+                      this.watsonListening = false;
+                      this.switchBtnClassByState('inactive');
                     }
                 });
-                stream.on('error', function(err) {
+
+                this.stream.on('error', (err) => {
+                    this.stream.stop();
+                    this.watsonListening = false;
+                    this.switchBtnClassByState('inactive');
                     throw new Error(err);
-                    stream.stop();
-                    watsonListening = false;
-                    switchBtnClassByState('inactive');
                 });
 
-            } else if (typeof watsonListening === 'boolean' && watsonListening) {
-                watsonListening = false;
-                stream.stop();
-                switchBtnClassByState('inactive');
+            } else if (typeof this.watsonListening === 'boolean' && this.watsonListening) {
+                this.watsonListening = false;
+                this.stream.stop();
+                this.switchBtnClassByState('inactive');
             } else {
-                throw new Error('WatsonAlgoliaConnectorInstantsearch.js: something went wrong');
+                throw new Error('WatsonAlgoliaConnectorInstantsearch.js: something went wrong.');
             }
         };
     });
-});
+
+    return this;
+  }
+
+  selfCheck() {
+    if (!this.config || !this.configWaston || !this.configWaston.tokenURL) {
+        throw new Error('WatsonAlgoliaConnectorInstantsearch.js: missing required connector config');
+     }
+  }
+
+  switchBtnClassByState(state='active') {
+    if(typeof this.config.template.onStateChange === 'function'){
+        return this.config.template.onStateChange(state);
+    }
+    if(state === 'inactive') {
+        document.querySelector(this.config.container.voiceButton)
+            .classList
+            .replace(this.config.template.onActiveClass, this.config.template.onInactiveClass);
+    } else if (state === 'active') {
+        document.querySelector(this.config.container.voiceButton)
+            .classList
+            .replace(this.config.template.onInactiveClass, this.config.template.onActiveClass);
+    }
+      return true;
+  };
+
+  watsonSSToken() {
+    return fetch(this.configWaston.tokenURL)
+        .then((res) => {
+            return res.text();
+      });
+  }
+
+};
+
+var IBMWatsonAlgoliaConnector = connectSearchBox(toFactory(IBMWatsonAlgoliaConnectorClass));
 
 export default IBMWatsonAlgoliaConnector;
