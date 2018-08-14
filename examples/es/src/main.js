@@ -1,7 +1,14 @@
 require('file-loader?name=[name].[ext]!./index.html');
 import InstantSearch from 'instantsearch.js/es/';
-import WidgetHits from "instantsearch.js/es/widgets/hits/hits";
-import WidgetSearchBox from "instantsearch.js/es/widgets/search-box/search-box";
+import {
+    hits,
+    searchBox,
+    stats,
+    sortBySelector,
+    pagination,
+    refinementList,
+    rangeSlider
+} from "instantsearch.js/es/widgets";
 import IBMWatsonAlgoliaConnector from '../../../src/IBMWatsonAlgoliaConnector';
 
 
@@ -19,19 +26,19 @@ function app(opts) {
     appId: opts.appId,
     apiKey: opts.apiKey,
     indexName: opts.indexName,
-    urlSync: true,
+    routing: true,
     searchFunction: opts.searchFunction,
   });
 
   search.addWidget(
-    WidgetSearchBox({
+    searchBox({
       container: '#search-input',
       placeholder: 'Search for products',
     })
   );
 
   search.addWidget(
-    WidgetHits({
+    hits({
       container: '#hits',
       templates: {
         item: getTemplate('hit'),
@@ -41,13 +48,13 @@ function app(opts) {
   );
 
   search.addWidget(
-    instantsearch.widgets.stats({
+    stats({
       container: '#stats',
     })
   );
 
   search.addWidget(
-    instantsearch.widgets.sortBySelector({
+    sortBySelector({
       container: '#sort-by',
       autoHideContainer: true,
       indices: [
@@ -68,14 +75,14 @@ function app(opts) {
   );
 
   search.addWidget(
-    instantsearch.widgets.pagination({
+    pagination({
       container: '#pagination',
       scrollTo: '#search-input',
     })
   );
 
   search.addWidget(
-    instantsearch.widgets.refinementList({
+    refinementList({
       container: '#category',
       attributeName: 'categories',
       operator: 'or',
@@ -86,7 +93,7 @@ function app(opts) {
   );
 
   search.addWidget(
-    instantsearch.widgets.refinementList({
+    refinementList({
       container: '#brand',
       attributeName: 'brand',
       operator: 'or',
@@ -103,7 +110,7 @@ function app(opts) {
   );
 
   search.addWidget(
-    instantsearch.widgets.rangeSlider({
+    rangeSlider({
       container: '#price',
       attributeName: 'price',
       templates: {
@@ -113,7 +120,7 @@ function app(opts) {
   );
 
   search.addWidget(
-    instantsearch.widgets.refinementList({
+    refinementList({
       container: '#type',
       attributeName: 'type',
       operator: 'and',
