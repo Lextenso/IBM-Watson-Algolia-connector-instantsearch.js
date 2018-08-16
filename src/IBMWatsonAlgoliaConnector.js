@@ -9,16 +9,26 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
   constructor(connectorRenderingOptions, isFirstRendering) {
     // Config
     if (!isFirstRendering) return;
+
+    this.renderingOptions = connectorRenderingOptions;
+    this.initConfig();
+
+    if(!this.configWaston.tokenURL && !this.config.getWatsonToken){
+        throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Missing Watson token config');
+    }
+
     if (!window.MediaRecorder && !watsonSpeechMicrophone.isSupported) {
-        this.switchBtnClassByState('error');
+        if(typeof this.config.autoHideContainer === 'boolean' && this.config.autoHideContainer){
+            document.querySelector(this.config.container.voiceButton).style.display = 'none';
+        } else {
+            this.switchBtnClassByState('error');
+        }
         return;
     };
-    this.renderingOptions = connectorRenderingOptions;
-    this.initConfig().selfCheck();
 
     this.watsonSSToken().then((token) => {
         if(typeof token !== 'string'){
-            throw new Error('WatsonAlgoliaConnectorInstantsearch.js: incorrect token format');
+            throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Incorrect token format');
         }
         this.configWaston.token =  token;
         document.querySelector(this.config.container.voiceButton).onclick = () => {
@@ -54,7 +64,7 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
                 this.stream.stop();
                 this.switchBtnClassByState('inactive');
             } else {
-                throw new Error('WatsonAlgoliaConnectorInstantsearch.js: something went wrong.');
+                throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Something went wrong.');
             }
         };
     });
@@ -62,19 +72,26 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
     return this;
   }
 
-  selfCheck() {
-    if (!this.config || !this.configWaston || !this.configWaston.tokenURL) {
-        throw new Error('WatsonAlgoliaConnectorInstantsearch.js: missing required connector config');
-    }
-     return this;
-  }
-
   initConfig() {
+      if (!this.renderingOptions
+          || !this.renderingOptions.widgetParams.watsonConfig
+          || !this.renderingOptions.widgetParams.template
+          || !this.renderingOptions.widgetParams.container) {
+          throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Missing required connector config.');
+      }
+
       this.config = this.renderingOptions.widgetParams;
       this.configWaston = this.config.watsonConfig;
       delete this.config.watsonConfig;
+
       if(typeof this.configWaston.getWatsonToken === 'function'){
           this.config.getWatsonToken = this.configWaston.getWatsonToken ;
+      } else if (!this.configWaston.getWatsonToken && !this.configWaston.tokenURL){
+          throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Missing required watson config.');
+      }
+      if(!this.config.container.searchInput
+      || !this.config.container.voiceButton){
+          throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Missing required container config.');
       }
 
       this.configWaston.token =  '';
