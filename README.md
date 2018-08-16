@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/version-0.3.1-green.svg)
+![](https://img.shields.io/github/release/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js/all.svg)
 ![](https://img.shields.io/badge/status-beta-red.svg)
 [![](https://data.jsdelivr.com/v1/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js/badge)](https://www.jsdelivr.com/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js)
 # IBM Watson connector for Algolia InstantSearch.js
@@ -8,7 +8,7 @@ IBM Watson connector for Algolia InstantSearch.js allows you to easily add Speec
 
 This repo is initially developed by [Lextenso](https://www.lextenso.fr), open to the community :hearts: and isn't affiliated or supported by IBM or Algolia.
 
-__PLEASE NOTE__ : This current version `0.3.1` still in beta, please use carefully.
+__PLEASE NOTE__ : This current version `0.5.0` still in beta, please use carefully.
 
 ## Built with IBM Watson Speech Services
 This is a middleware between _Algolia InstantSearch.js_ and _IBM Watson_.
@@ -39,7 +39,7 @@ Pre-compiled bundle is available on [jsdelivr.com CDN](https://www.jsdelivr.com/
 
 Or build the connector with Webpack :
 ```console
-sher-lock:MyProject$ npm run build
+sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build
 ```
 
 ### ES Module with Webpack
@@ -54,7 +54,7 @@ All attributes are listed and detailed in the [specifications section](#specific
 
 #### Standalone
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.3.1-beta/dist/IBMWatsonAlgoliaConnector.js" integrity="sha256-AYjIPJf0idsNjSmQuUU1vhqBzESeV7rXS8uIvjFwXIw=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.5.0/dist/IBMWatsonAlgoliaConnector.js"></script>
 <script type="text/javascript">
 const search = instantsearch(config);
 
@@ -202,23 +202,37 @@ sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
         <td></td>
         <td>onActiveClass</td>
         <td>[string]</td>
-        <td>Yes (if NOT `onStateChange`)</td>
+        <td>Yes (except if `onStateChange` is set)</td>
         <td></td>
     </tr>
     <tr>
         <td></td>
         <td>onInactiveClass</td>
         <td>[string]</td>
-        <td>Yes (if NOT `onStateChange`)</td>
+        <td>Yes (except if `onStateChange` is set)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>onErrorClass</td>
+        <td>[string]</td>
+        <td>No (if NOT set `onInactiveClass` will be used)</td>
         <td></td>
     </tr>
     <tr>
         <td></td>
         <td>onStateChange</td>
-        <td>[function (state =&gt; active &vert;&vert;&nbsp;inactive)]</td>
-        <td>Yes (Only if `onInactiveClass` and `onActiveClass` are not enouth for your needs)</td>
+        <td>[function (state =&gt; active &vert;&vert;&nbsp;inactive &vert;&vert; error)]</td>
+        <td>Yes (Only if `on{state}Class` are not enouth for your needs)</td>
         <td>This callback will be triggered every time the state of Watson change.<br/>
-        Possible values: active OR inactive<br><strong>NOTE</strong> : The callback function override `onInactiveClass` and `onActiveClass`</td>
+        Possible values: active OR inactive<br><strong>NOTE</strong> : This callback function override `onInactiveClass`, `onActiveClass` and `onErrorClass`</td>
+    </tr>
+    <tr>
+        <td>autoHideContainer</td>
+        <td></td>
+        <td>[boolean &vert;&vert; string]</td>
+        <td>No</td>
+        <td>Hide the container voiceButton if MediaRecorder isn't supported.<br>It can be a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">valid CSS selector</a> string, if you want to hide parent container.</td>
     </tr>
     <tr>
         <td>watsonConfig</td>
@@ -231,8 +245,15 @@ sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
         <td></td>
         <td>tokenURL</td>
         <td>[string]</td>
-        <td>Yes</td>
+        <td>Yes (if `getWatsonToken` isn't set)</td>
         <td>Must be an URL to a back-end service</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>getWatsonToken</td>
+        <td>[function]</td>
+        <td>No</td>
+        <td>Must be a Promise returning only the token as a string<br><strong>NOTE</strong> : This callback function override `tokenURL`</td>
     </tr>
     <tr>
         <td></td>
@@ -253,8 +274,6 @@ sher-lock:IBM-watson-algolia-connector-instantsearch.js$ npm run build-example
 ## Todo
 
 * NPM publish
-* On start state (default state in case of unsupported browsers)
-* Advanced fetch Watson token function (REST API, Auth, etc ...)
 * Better cross-browser testing
 * Improve documentation
 

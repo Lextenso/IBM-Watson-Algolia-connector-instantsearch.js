@@ -7,7 +7,6 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
 
 class IBMWatsonAlgoliaConnectorClass {
     constructor(connectorRenderingOptions, isFirstRendering) {
-        // Config
         if (!isFirstRendering) return;
 
         this.renderingOptions = connectorRenderingOptions;

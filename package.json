@@ -1,6 +1,6 @@
 {
   "name": "IBM-watson-algolia-connector-instantsearch.js",
-  "version": "0.3.1",
+  "version": "0.5.0",
   "description": "IBM Watson connector for Algolia Instantsearch.js - Powered by Algolia and IBM Watson, together ! 🎉🚀",
   "scripts": {
     "build": "webpack",
