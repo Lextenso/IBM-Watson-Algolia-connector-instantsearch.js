@@ -9,17 +9,12 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
   constructor(connectorRenderingOptions, isFirstRendering) {
     // Config
     if (!isFirstRendering) return;
-    if (!window.MediaRecorder && !watsonSpeechMicrophone.isSupported) return;
+    if (!window.MediaRecorder && !watsonSpeechMicrophone.isSupported) {
+        this.switchBtnClassByState('error');
+        return;
+    };
     this.renderingOptions = connectorRenderingOptions;
-    this.config = this.renderingOptions.widgetParams;
-    this.configWaston = this.config.watsonConfig;
-    delete this.config.watsonConfig;
-
-    this.configWaston.token =  '';
-    this.configWaston.outputElement = this.config.container.searchInput;
-
-    this.watsonListening = false;
-    this.selfCheck();
+    this.initConfig().selfCheck();
 
     this.watsonSSToken().then((token) => {
         if(typeof token !== 'string'){
@@ -47,9 +42,10 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
                 });
 
                 this.stream.on('error', (err) => {
+                    console.log('error is detected');
                     this.stream.stop();
                     this.watsonListening = false;
-                    this.switchBtnClassByState('inactive');
+                    this.switchBtnClassByState('error');
                     throw new Error(err);
                 });
 
@@ -69,21 +65,54 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
   selfCheck() {
     if (!this.config || !this.configWaston || !this.configWaston.tokenURL) {
         throw new Error('WatsonAlgoliaConnectorInstantsearch.js: missing required connector config');
-     }
+    }
+     return this;
+  }
+
+  initConfig() {
+      this.config = this.renderingOptions.widgetParams;
+      this.configWaston = this.config.watsonConfig;
+      delete this.config.watsonConfig;
+      if(typeof this.configWaston.getWatsonToken === 'function'){
+          this.config.getWatsonToken = this.configWaston.getWatsonToken ;
+      }
+
+      this.configWaston.token =  '';
+      this.configWaston.outputElement = this.config.container.searchInput;
+
+      this.watsonListening = false;
+
+      return this;
   }
 
   switchBtnClassByState(state='active') {
     if(typeof this.config.template.onStateChange === 'function'){
         return this.config.template.onStateChange(state);
     }
-    if(state === 'inactive') {
-        document.querySelector(this.config.container.voiceButton)
-            .classList
-            .replace(this.config.template.onActiveClass, this.config.template.onInactiveClass);
+    const containerClassList = document.querySelector(this.config.container.voiceButton).classList;
+    if(typeof this.config.template.onErrorClass !== 'undefined' && containerClassList.contains(this.config.template.onErrorClass)){
+        containerClassList.remove(this.config.template.onErrorClass)
+    }
+    if(state === 'inactive' || (state === 'error' && typeof this.config.template.onErrorClass === 'undefined')) {
+        if(containerClassList.contains(this.config.template.onActiveClass)){
+            containerClassList.replace(this.config.template.onActiveClass, this.config.template.onInactiveClass);
+        } else {
+            containerClassList.add(this.config.template.onInactiveClass);
+        }
     } else if (state === 'active') {
-        document.querySelector(this.config.container.voiceButton)
-            .classList
-            .replace(this.config.template.onInactiveClass, this.config.template.onActiveClass);
+        if(containerClassList.contains(this.config.template.onInactiveClass)){
+            containerClassList.replace(this.config.template.onInactiveClass, this.config.template.onActiveClass);
+        } else {
+            containerClassList.add(this.config.template.onActiveClass);
+        }
+    } else if(state === 'error' && typeof this.config.template.onErrorClass === 'string'){
+        if(containerClassList.contains(this.config.template.onActiveClass)){
+            containerClassList.remove(this.config.template.onActiveClass)
+        }
+        if(containerClassList.contains(this.config.template.onInactiveClass)){
+            containerClassList.remove(this.config.template.onInactiveClass)
+        }
+        containerClassList.add(this.config.template.onErrorClass);
     }
       return true;
   };
