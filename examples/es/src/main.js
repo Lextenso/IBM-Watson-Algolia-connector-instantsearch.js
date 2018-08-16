@@ -139,7 +139,8 @@ function app(opts) {
           },
           template: {
               onActiveClass: 'recording',
-              onInactiveClass: 'primary'
+              onInactiveClass: 'primary',
+              onErrorClass: 'error'
           },
           watsonConfig: {
               tokenURL: 'https://local.example.dev/api/watson/get-token',

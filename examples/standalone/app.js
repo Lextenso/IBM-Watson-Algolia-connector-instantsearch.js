@@ -126,12 +126,13 @@ function app(opts) {
           },
           template: {
               onActiveClass: 'recording',
-              onInactiveClass: 'primary'
+              onInactiveClass: 'primary',
+              onErrorClass: 'error'
           },
           watsonConfig: {
-              tokenURL: '../../dist/api.php',
+              tokenURL: 'https://local.example.dev/api/watson/get-token',
               model: 'en-US_BroadbandModel',
-              continuous: false
+              continuous: false,
           }
       })
   );
