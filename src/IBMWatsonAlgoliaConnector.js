@@ -20,6 +20,8 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
     if (!window.MediaRecorder && !watsonSpeechMicrophone.isSupported) {
         if(typeof this.config.autoHideContainer === 'boolean' && this.config.autoHideContainer){
             document.querySelector(this.config.container.voiceButton).style.display = 'none';
+        } else if (typeof this.config.autoHideContainer === 'string'){
+            document.querySelector(this.config.autoHideContainer).style.display = 'none';
         } else {
             this.switchBtnClassByState('error');
         }
