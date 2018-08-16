@@ -118,6 +118,9 @@ import watsonSpeechMicrophone from 'watson-speech/speech-to-text/recognize-micro
   };
 
   watsonSSToken() {
+    if(typeof this.config.getWatsonToken === 'function'){
+        return Promise.resolve(this.config.getWatsonToken());
+    }
     return fetch(this.configWaston.tokenURL)
         .then((res) => {
             return res.text();
