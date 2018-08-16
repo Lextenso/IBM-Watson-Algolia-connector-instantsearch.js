@@ -22,7 +22,7 @@ app({
 });
 
 function app(opts) {
-  const search = instantsearch({
+  const search = InstantSearch({
     appId: opts.appId,
     apiKey: opts.apiKey,
     indexName: opts.indexName,
