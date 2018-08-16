@@ -26,49 +26,14 @@ class IBMWatsonAlgoliaConnectorClass {
                 this.switchBtnClassByState('error');
             }
             return;
-        };
+        }
 
         this.watsonSSToken().then((token) => {
             if(typeof token !== 'string'){
                 throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Incorrect token format');
             }
             this.configWaston.token =  token;
-            document.querySelector(this.config.container.voiceButton).onclick = () => {
-                if(typeof this.watsonListening === 'boolean' && !this.watsonListening){
-                    this.watsonListening = true;
-                    this.switchBtnClassByState('active');
-                    this.stream = watsonSpeechMicrophone(this.configWaston);
-
-                    this.stream.on('data', (data) => {
-                        var query = document.querySelector(this.config.container.searchInput).value || '';
-                        query = query.trim();
-                        if(query !== ''){
-                            this.renderingOptions.refine(query);
-                        }
-
-                        if(typeof this.configWaston.continuous === 'boolean' && !this.configWaston.continuous && typeof data.results[0] !== 'undefined' && typeof data.results[0].final === 'boolean' && data.results[0].final){
-                            this.stream.stop();
-                            this.watsonListening = false;
-                            this.switchBtnClassByState('inactive');
-                        }
-                    });
-
-                    this.stream.on('error', (err) => {
-                        console.log('error is detected');
-                        this.stream.stop();
-                        this.watsonListening = false;
-                        this.switchBtnClassByState('error');
-                        throw new Error(err);
-                    });
-
-                } else if (typeof this.watsonListening === 'boolean' && this.watsonListening) {
-                    this.watsonListening = false;
-                    this.stream.stop();
-                    this.switchBtnClassByState('inactive');
-                } else {
-                    throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Something went wrong.');
-                }
-            };
+            document.querySelector(this.config.container.voiceButton).onclick = this.startWatson.bind(this);
         });
 
         return this;
@@ -130,7 +95,7 @@ class IBMWatsonAlgoliaConnectorClass {
             containerClassList.add(this.config.template.onErrorClass);
         }
         return true;
-    };
+    }
 
     watsonSSToken() {
         if(typeof this.config.getWatsonToken === 'function'){
@@ -145,7 +110,54 @@ class IBMWatsonAlgoliaConnectorClass {
         });
     }
 
-};
+    startWatson() {
+        if(typeof this.watsonListening === 'boolean' && !this.watsonListening){
+            this.onWatsonStart();
+            this.stream = watsonSpeechMicrophone(this.configWaston);
+
+            this.stream.on('data', this.onWatsonData.bind(this));
+            this.stream.on('error', this.onWatsonError.bind(this));
+
+        } else if (typeof this.watsonListening === 'boolean' && this.watsonListening) {
+            this.onWatsonStop();
+        } else {
+            throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Something went wrong.');
+        }
+    }
+
+    onWatsonStart(){
+        this.watsonListening = true;
+        this.switchBtnClassByState('active');
+    }
+
+    onWatsonData(data) {
+        var query = document.querySelector(this.config.container.searchInput).value || '';
+        query = query.trim();
+        if(query !== ''){
+            this.renderingOptions.refine(query);
+        }
+
+        if(typeof data.results[0] !== 'undefined' && typeof data.results[0].final === 'boolean' && data.results[0].final){
+            if(typeof this.configWaston.continuous === 'boolean' && !this.configWaston.continuous){
+                this.onWatsonStop();
+            }
+        }
+    }
+
+    onWatsonStop(){
+        this.watsonListening = false;
+        this.stream.stop();
+        this.switchBtnClassByState('inactive');
+    }
+
+    onWatsonError(err){
+        this.stream.stop();
+        this.watsonListening = false;
+        this.switchBtnClassByState('error');
+        throw new Error(err);
+    }
+
+}
 
 var IBMWatsonAlgoliaConnector = connectSearchBox(toFactory(IBMWatsonAlgoliaConnectorClass));
 
