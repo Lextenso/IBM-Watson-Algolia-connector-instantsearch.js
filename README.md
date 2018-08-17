@@ -8,11 +8,11 @@ IBM Watson connector for Algolia InstantSearch.js allows you to easily add Speec
 
 This repo is initially developed by [Lextenso](https://www.lextenso.fr), open to the community :hearts: and isn't affiliated or supported by IBM or Algolia.
 
-__PLEASE NOTE__ : This current version `0.5.0` still in beta, please use carefully.
+__PLEASE NOTE__ : This current version `0.5.1` still in beta, please use carefully.
 
 ## Built with IBM Watson Speech Services
 This is a middleware between _Algolia InstantSearch.js_ and _IBM Watson_.
-This Algolia connector is bundled with the NPM package `watson-speech/speech-to-text/recognize-microphone` and `instantsearch.js/es/connectors`.
+This Algolia connector is bundled with the NPM package `watson-speech/speech-to-text/recognize-microphone` and `instantsearch.js/es/connectors/connectSearchBox`.
 
 The connector handle :
 * Microphone browser authorization
@@ -34,7 +34,7 @@ You also need [Algolia](https://www.algolia.com/users/sign_up) and [IBM Watson](
 ### Standalone
 Pre-compiled bundle is available on [jsdelivr.com CDN](https://www.jsdelivr.com/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js) :
  ```html
-<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.3.1-beta/dist/IBMWatsonAlgoliaConnector.js" integrity="sha256-AYjIPJf0idsNjSmQuUU1vhqBzESeV7rXS8uIvjFwXIw=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.5.1/dist/IBMWatsonAlgoliaConnector.js"></script>
 ```
 
 Or build the connector with Webpack :
@@ -54,7 +54,7 @@ All attributes are listed and detailed in the [specifications section](#specific
 
 #### Standalone
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.5.0/dist/IBMWatsonAlgoliaConnector.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.5.1/dist/IBMWatsonAlgoliaConnector.js"></script>
 <script type="text/javascript">
 const search = instantsearch(config);
 

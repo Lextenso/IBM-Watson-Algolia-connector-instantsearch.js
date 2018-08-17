@@ -16,7 +16,7 @@ class IBMWatsonAlgoliaConnectorClass {
             throw new Error('WatsonAlgoliaConnectorInstantsearch.js: Missing Watson token config');
         }
 
-        if (!window.MediaRecorder || !watsonSpeechMicrophone.isSupported) {
+        if (!window.MediaRecorder && !watsonSpeechMicrophone.isSupported) {
             if(typeof this.config.autoHideContainer === 'boolean' && this.config.autoHideContainer){
                 document.querySelector(this.config.container.voiceButton).style.display = 'none';
             } else if (typeof this.config.autoHideContainer === 'string'){
