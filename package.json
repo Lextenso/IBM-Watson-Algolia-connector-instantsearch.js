@@ -9,13 +9,6 @@
     "build-examples": "webpack --config webpack.config.js && webpack --config examples/es/webpack.config.js"
   },
   "license": "Apache-2.0",
-  "keywords": [
-      "algolia",
-      "algolia-instantsearch",
-      "algolia-connector",
-      "ibm-watson",
-      "ibm-watson-speech",
-  ],
   "author": "Julien Madiot <julien.madiot@lextenso.fr>",
   "dependencies": {
     "instantsearch.js": "^2.10.0",
