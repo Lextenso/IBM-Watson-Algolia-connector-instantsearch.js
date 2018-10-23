@@ -9,7 +9,7 @@ import {
     refinementList,
     rangeSlider
 } from "instantsearch.js/es/widgets";
-import IBMWatsonAlgoliaConnector from '../../../src/IBMWatsonAlgoliaConnector';
+import IBMWatsonAlgoliaConnector from '../../../src/index';
 
 
 app({
