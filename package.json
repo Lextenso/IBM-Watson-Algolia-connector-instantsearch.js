@@ -5,7 +5,7 @@
   "main": "dist/IBMWatsonAlgoliaConnector.js",
   "repository": "github:Lextenso/IBM-Watson-Algolia-connector-instantsearch.js",
   "scripts": {
-    "start": "webpack --config examples/es/webpack.config.js",
+    "start": "npm install && webpack --config examples/es/webpack.config.js",
     "build": "webpack",
     "build-examples": "webpack --config webpack.config.js && webpack --config examples/es/webpack.config.js"
   },
@@ -20,6 +20,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
     "file-loader": "^1.1.11",
     "jshint": "^2.9.6",
     "jshint-loader": "^0.8.4",
