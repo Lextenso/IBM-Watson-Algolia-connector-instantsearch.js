@@ -8,7 +8,7 @@ IBM Watson connector for Algolia InstantSearch.js allows you to easily add Speec
 
 This repo is initially developed by [Lextenso](https://www.lextenso.fr), open to the community :hearts: and isn't affiliated or supported by IBM or Algolia.
 
-__PLEASE NOTE__ : This current version `0.5.1` still in beta, please use carefully.
+__PLEASE NOTE__ : This current version `0.6.0` still in beta, please use carefully.
 
 ## Built with IBM Watson Speech Services
 This is a middleware between _Algolia InstantSearch.js_ and _IBM Watson_.
@@ -54,14 +54,14 @@ All attributes are listed and detailed in the [specifications section](#specific
 
 #### Standalone
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.5.1/dist/IBMWatsonAlgoliaConnector.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.6.0/dist/IBMWatsonAlgoliaConnector.js"></script>
 <script type="text/javascript">
 const search = instantsearch(config);
 
 // [...]
 
 search.addWidget(
-    IBMWatsonAlgoliaConnector.default({
+    IBMWatsonAlgoliaConnector({
         container: {
             searchInput: [string],
             voiceButton: [string]
