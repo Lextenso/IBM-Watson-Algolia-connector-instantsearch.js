@@ -5,6 +5,7 @@
   "main": "dist/IBMWatsonAlgoliaConnector.js",
   "repository": "github:Lextenso/IBM-Watson-Algolia-connector-instantsearch.js",
   "scripts": {
+    "start": "webpack --config examples/es/webpack.config.js",
     "build": "webpack",
     "build-examples": "webpack --config webpack.config.js && webpack --config examples/es/webpack.config.js"
   },
