@@ -1,6 +1,6 @@
 {
   "name": "IBM-watson-algolia-connector-instantsearch.js",
-  "version": "0.6.0",
+  "version": "0.8.0",
   "description": "IBM Watson connector for Algolia Instantsearch.js - Powered by Algolia and IBM Watson, together ! 🎉🚀",
   "main": "dist/IBMWatsonAlgoliaConnector.js",
   "repository": "github:Lextenso/IBM-Watson-Algolia-connector-instantsearch.js",
@@ -12,9 +12,9 @@
   "license": "Apache-2.0",
   "author": "Julien Madiot <julien.madiot@lextenso.fr>",
   "dependencies": {
-    "instantsearch.js": "^2.10.0",
+    "instantsearch.js": "^2.10.4",
     "to-factory": "^1.0.0",
-    "watson-speech": "^0.34.2"
+    "watson-speech": "^0.35.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -25,6 +25,7 @@
     "jshint": "^2.9.6",
     "jshint-loader": "^0.8.4",
     "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.0.8",
+    "webpack-version-file": "^0.1.3"
   }
 }

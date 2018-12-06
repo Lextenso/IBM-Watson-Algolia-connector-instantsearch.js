@@ -8,6 +8,7 @@ class IBMWatsonAlgoliaConnectorClass {
         this.name = 'WatsonAlgoliaConnectorInstantsearch.js';
         this.renderingOptions = connectorRenderingOptions;
         this.config = this.renderingOptions.widgetParams;
+        this.query = '';
 
         if(!this.isAvailable()){
             return;
