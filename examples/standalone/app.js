@@ -131,15 +131,9 @@ function app(opts) {
           },
           autoHideContainer: '.cta-watson',
           watsonConfig: {
-              //tokenURL: 'https://local.example.dev/api/watson/get-token',
+              tokenURL: 'https://local.example.dev/api/watson/get-token',
               model: 'en-US_BroadbandModel',
-              continuous: false,
-              getWatsonToken: () => {
-                return fetch('../../dist/api.php')
-                    .then((res) => {
-                        return res.text();
-                    });
-              }
+              continuous: false
           }
       })
   );
