@@ -33,7 +33,7 @@ You also need [Algolia](https://www.algolia.com/users/sign_up) and [IBM Watson](
 ### Standalone
 Pre-compiled bundle is available on [jsdelivr.com CDN](https://www.jsdelivr.com/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js) :
  ```html
-<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.5.1/dist/IBMWatsonAlgoliaConnector.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.8.0/dist/IBMWatsonAlgoliaConnector.js"></script>
 ```
 
 Or build the connector with Webpack :
