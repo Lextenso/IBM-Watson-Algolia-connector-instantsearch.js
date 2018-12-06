@@ -1,6 +1,5 @@
 ![](https://img.shields.io/github/release/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js/all.svg)
 ![](https://img.shields.io/badge/status-beta-red.svg)
-[![](https://data.jsdelivr.com/v1/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js/badge)](https://www.jsdelivr.com/package/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js)
 # IBM Watson connector for Algolia InstantSearch.js
 IBM Watson connector for Algolia InstantSearch.js allows you to easily add Speech to Text (STT) as a widget to your Algolia search.
 
@@ -8,7 +7,7 @@ IBM Watson connector for Algolia InstantSearch.js allows you to easily add Speec
 
 This repo is initially developed by [Lextenso](https://www.lextenso.fr), open to the community :hearts: and isn't affiliated or supported by IBM or Algolia.
 
-__PLEASE NOTE__ : This current version `0.6.0` still in beta, please use carefully.
+__PLEASE NOTE__ : This current version `0.8.0` still in beta, please use carefully.
 
 ## Built with IBM Watson Speech Services
 This is a middleware between _Algolia InstantSearch.js_ and _IBM Watson_.
@@ -26,8 +25,8 @@ This connector doesn't inject any templates, you have to develop your own HTML e
 You also need [Algolia](https://www.algolia.com/users/sign_up) and [IBM Watson](https://www.ibm.com/watson/services/speech-to-text/) credentials. (_Elementary, my dear Watson_)
 
 ## Dependencies
-* [instantsearch.js](https://github.com/algolia/instantsearch.js/) : 2.10.0
-* [watson-speech](https://github.com/watson-developer-cloud/speech-javascript-sdk/) : 0.34.2
+* [instantsearch.js](https://github.com/algolia/instantsearch.js/) : 2.10.4
+* [watson-speech](https://github.com/watson-developer-cloud/speech-javascript-sdk/) : 0.35.4
 
 ## Installation
 
@@ -54,7 +53,7 @@ All attributes are listed and detailed in the [specifications section](#specific
 
 #### Standalone
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.6.0/dist/IBMWatsonAlgoliaConnector.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Lextenso/IBM-Watson-Algolia-connector-instantsearch.js@0.8.0/dist/IBMWatsonAlgoliaConnector.js"></script>
 <script type="text/javascript">
 const search = instantsearch(config);
 
